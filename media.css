@@ -1,0 +1,20 @@
+@custom-media --motionOK (prefers-reduced-motion: no-preference);
+@custom-media --modern (color), (hover);
+
+@custom-media --xs (width >= 375px);
+@custom-media --xs-only (375px <= width < 568px);
+
+@custom-media --sm (width >= 568px);
+@custom-media --sm-only (568px <= width < 768px);
+
+@custom-media --md (width >= 768px);
+@custom-media --md-only (768px <= width < 992px);
+
+@custom-media --lg (width >= 992px);
+@custom-media --lg-only (992px <= width < 1200px);
+
+@custom-media --xl (width >= 1200px);
+@custom-media --xl-only (1200px <= width < 1440px);
+
+@custom-media --xxl (width >= 1440px);
+@custom-media --xxl-only (1440px <= width < 1920px);

@@ -1,0 +1,5 @@
+@layer reset, base, layouts, components, utilities;
+
+@import "@vitality/design-tokens/dist/tokens.css";
+@import "./shared/styles/reset.css" layer(reset);
+@import "./shared/styles/base.css" layer(base);

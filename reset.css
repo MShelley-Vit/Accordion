@@ -1,0 +1,179 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+:where(:root) {
+    interpolate-size: allow-keywords;
+}
+
+:where(html) {
+    font-synthesis: none;
+    line-height: 1.6;
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+:where(body) {
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+}
+
+:where(:focus-visible) {
+    outline-color: currentColor;
+    outline-offset: 3px;
+    outline-style: solid;
+    outline-width: 3px;
+}
+
+:where(:focus-visible, :target) {
+    scroll-margin-block: 8dvh;
+}
+
+:where([popover]) {
+    inset: auto;
+}
+
+:where(p) {
+    max-inline-size: 75ch;
+    text-wrap: pretty;
+}
+
+:where(p, h1, h2, h3, h4, h5, h6, a) {
+    overflow-wrap: break-word;
+}
+
+:where(h1) {
+    font-size: 2em;
+    margin-block: 0.67em;
+}
+
+:where(h1, h2, h3) {
+    line-height: 1.1;
+}
+
+:where(h1, h2, h3, h4, h5, h6, blockquote) {
+    text-wrap: balance;
+}
+
+:where(p, blockquote) {
+    hanging-punctuation: first allow-end last;
+}
+
+:where(figure) {
+    inline-size: fit-content;
+    margin-inline: auto;
+}
+
+:where(figcaption) {
+    contain: inline-size;
+}
+
+:where(img, picture, svg, video) {
+    block-size: auto;
+    display: block;
+    max-inline-size: 100%;
+}
+
+:where(img, picture) {
+    font-style: italic;
+    shape-margin: 0.75em;
+    vertical-align: middle;
+}
+
+:where(svg) {
+    fill: currentColor;
+}
+
+:where(button, input, textarea, select) {
+    font-family: inherit;
+    font-size: inherit;
+    touch-action: manipulation;
+}
+
+:where(input:not([type="radio"]):not([type="checkbox"]), textarea, select) {
+    display: block;
+    inline-size: 100%;
+}
+
+:where(label):has(+ :where(textarea, input, select)) {
+    display: block;
+    inline-size: fit-content;
+}
+
+:where(input, textarea, select) {
+    field-sizing: content;
+}
+
+:where(textarea) {
+    min-block-size: 6em;
+    resize: vertical;
+    resize: block;
+}
+
+:where(textarea[rows]) {
+    field-sizing: unset;
+    min-block-size: auto;
+}
+
+:where(fieldset) {
+    min-inline-size: 0;
+}
+
+:where([type="tel"], [type="url"], [type="email"], [type="number"]):not(:placeholder-shown) {
+    direction: ltr;
+}
+
+:where(input, textarea, pre) {
+    text-autospace: no-autospace;
+}
+
+:where(summary, select, button, label[for], input:not([type="text"], [type="email"], [type="password"], [type="search"], [type="tel"], [type="url"], [type="number"], [type="datetime"])),
+:where(input[type="file"])::file-selector-button {
+    cursor: pointer;
+}
+
+:where(:disabled, label:has(~ :disabled), [aria-disabled="true"]) {
+    cursor: not-allowed;
+}
+
+:where(table) {
+    border-collapse: collapse;
+    border: 1px solid;
+    caption-side: bottom;
+}
+
+:where(th, td) {
+    border: 1px solid;
+    padding: 0.25em 0.5em;
+}
+
+:where(abbr[title]) {
+    cursor: help;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+}
+
+:where(iframe) {
+    border: 0;
+}
+
+:where(html:has(dialog:modal[open])) {
+    overflow: clip;
+}
+
+[hidden]:not([hidden="until-found"]) {
+    display: none !important;
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :where(html:focus-within) {
+        scroll-behavior: smooth;
+    }
+}

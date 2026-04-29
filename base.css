@@ -1,0 +1,15 @@
+html {
+    color: var(--vit-color-text);
+    font: var(--vit-type-body);
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+body {
+    background: var(--vit-color-canvas);
+    margin: 0;
+}
+
+:focus-visible {
+    outline: var(--vit-border-focus-ring);
+}

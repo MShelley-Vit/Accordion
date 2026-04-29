@@ -1,0 +1,20 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:host {
+    contain: content;
+}
+
+:focus-visible {
+    outline-color: Highlight;
+    outline-offset: 2px;
+    outline-style: dashed;
+    outline-width: 2px;
+}
+
+[hidden]:not([hidden="until-found"]) {
+    display: none !important;
+}
