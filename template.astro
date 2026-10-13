@@ -1,0 +1,168 @@
+---
+import PresalesBaseLayout from "./presales/_structure.astro";
+
+import VitArticleCard from "#examples/components/vit-card/article.astro";
+import VitArticleHorizontalCard from "#examples/components/vit-card/article-horizontal.astro";
+
+export const title = "Blog Archive";
+export const categoryPath = [".co.uk"];
+---
+
+<script>
+	import "@vitality/design-system/author/author";
+	import "@vitality/design-system/auto-layout/auto-layout";
+	import "@vitality/design-system/card/card";
+	import "@vitality/design-system/hero/hero";
+	import "@vitality/design-system/icon/icon";
+	import "@vitality/design-system/section/section";
+</script>
+
+
+<PresalesBaseLayout>
+	<vit-hero>
+		<span slot="kicker">Kicker</span>
+		<h1 slot="title">Display header</h1>
+		<p>Supporting body copy goes here</p>
+		<small slot="disclaimer">* Disclaimer or terms and conditions text goes here.</small>
+		<img src="/assets/illustrations/woman-on-yoga-ball.svg" width="500" height="500" alt="Woman on a yoga ball" slot="img">
+	</vit-hero>
+
+	<vit-section>
+		<div class="placeholder" style="height: 50px;">Autocomplete Input</div>
+	</vit-section>
+
+	<vit-section appearance="subtle-2" centered="">
+		<h2 slot="heading">Title header goes here</h2>
+		<p slot="description">Supporting subtitle content goes here</p>
+
+		<!-- <div> -->
+		<div class="vit-l-grid" style="--grid-gap: var(--size-16);">
+			<!-- <div> -->
+			<div data-col-span="all" data-col-span-lg="6">
+				<vit-card variant="article-featured" href="#" clickable-card="" link-label="Accessible link text">
+					<img slot="image" class="featured-card-image" src="/assets/images/card-photography.avif" width="288" height="270" alt="Image of someone reading">
+
+					<span slot="kicker">
+						Kicker
+					</span>
+
+					<h3 slot="heading">
+						Article title that can go over multiple lines
+					</h3>
+
+					<p>
+						Supporting text over two lines, trying to keep content short and sweet for readers.
+					</p>
+
+					<vit-author slot="footer" published="2026-06-24" updated="2026-08-10" updated-text="Updated">
+						<img slot="image" src="/assets/images/author.avif" width="40" height="40" alt="Photo of Amber Ayton">
+
+						<span slot="publisher">
+							by <strong>User Name</strong>
+						</span>
+
+						<span slot="reviewer">
+							Reviewed by <strong>User Name</strong>
+						</span>
+					</vit-author>
+				</vit-card>
+			</div>
+			<!-- <div> -->
+			<div data-col-span="all" data-col-span-lg="6" style="--grid-gap: var(--size-16);">
+				{Array.from({ length: 3 }).map(() => (
+					<vit-card variant="article-horizontal" href="#" clickable-card="" link-label="Accessible link text">
+						<img slot="image" src="/assets/images/card-photography.avif" width="288" height="270" alt="Image of someone reading">
+
+						<span slot="kicker">
+							Kicker
+						</span>
+
+						<h3 slot="heading">
+							Article title that can go over multiple lines
+						</h3>
+
+						<p>
+							Supporting text over two lines, trying to keep content short and sweet for readers.
+						</p>
+
+						<vit-author slot="footer" published="2026-06-24" updated="2026-08-10" updated-text="Updated">
+							<img slot="image" src="/assets/images/author.avif" width="40" height="40" alt="Photo of Amber Ayton">
+
+							<span slot="publisher">
+								by <strong>User Name</strong>
+							</span>
+
+							<span slot="reviewer">
+								Reviewed by <strong>User Name</strong>
+							</span>
+						</vit-author>
+					</vit-card>
+				))}
+				{/* <!-- <VitArticleHorizontalCard />
+				<VitArticleHorizontalCard />
+				<VitArticleHorizontalCard /> --> */}
+			</div>
+		</div>
+	</vit-section>
+
+	<vit-section appearance="subtle-3" centered="">
+		<h2 slot="heading">Title header goes here</h2>
+		<p slot="description">Supporting subtitle content goes here</p>
+
+		<div class="vit-l-flex-columns vit-l-justify-content-center">
+			{Array.from({ length: 4 }).map(() => (
+				<VitArticleCard />
+			))}
+		</div>
+
+		<button slot="actions" class="vit-button" type="button">
+			<vit-icon name="navigation/chevron-left"></vit-icon>
+			<vit-icon name="system-status/spinner-third-duotone"></vit-icon>
+			Content
+			<vit-icon name="navigation/chevron-right"></vit-icon>
+		</button>
+	</vit-section>
+
+	<vit-section appearance="subtle-2" centered="">
+		<h2 slot="heading">Title header goes here</h2>
+		<p slot="description">Supporting subtitle content goes here</p>
+		<vit-auto-layout>
+			{Array.from({ length: 6 }).map(() => (
+				<vit-card variant="article" href="#" clickable-card="" link-label="Accessible link text">
+					<img slot="image" src="/assets/images/card-photography.avif" width="288" height="270" alt="Image of someone reading">
+
+					<span slot="kicker">
+						Kicker
+					</span>
+
+					<h3 slot="heading">
+						Article title that can go over multiple lines
+					</h3>
+
+					<p>
+						Supporting text over two lines, trying to keep content short and sweet for readers.
+					</p>
+
+					<vit-author slot="footer" published="2026-06-24" updated="2026-08-10" updated-text="Updated">
+						<img slot="image" src="/assets/images/author.avif" width="40" height="40" alt="Photo of Amber Ayton">
+
+						<span slot="publisher">
+							by <strong>User Name</strong>
+						</span>
+
+						<span slot="reviewer">
+							Reviewed by <strong>User Name</strong>
+						</span>
+					</vit-author>
+				</vit-card>
+			))}
+		</vit-auto-layout>
+
+		<button slot="actions" class="vit-button" type="button">
+			<vit-icon name="navigation/chevron-left"></vit-icon>
+			<vit-icon name="system-status/spinner-third-duotone"></vit-icon>
+			Content
+			<vit-icon name="navigation/chevron-right"></vit-icon>
+		</button>
+	</vit-section>
+</PresalesBaseLayout>
