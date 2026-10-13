@@ -1,0 +1,461 @@
+@import "../../shared/styles/media.css";
+
+:host {
+    --_card-bg-color: var(--vit-color-surface);
+    --_card-font-color: var(--vit-color-text);
+    border-radius: var(--vit-radius-lg);
+    box-shadow: var(--vit-shadow);
+    container: vit-card / inline-size;
+    display: block;
+    inline-size: 100%;
+}
+
+.card {
+    background-color: var(--_card-bg-color);
+    block-size: 100%;
+    color: var(--_card-font-color);
+    display: grid;
+    gap: var(--vit-spacing-container-padding-md);
+    grid-template-areas:
+        "header"
+        "image"
+        "content"
+        "footer";
+    padding: var(--vit-spacing-container-padding-md);
+    position: relative;
+}
+
+header,
+.logo,
+.image,
+.content,
+footer {
+    display: flex;
+    flex-direction: column;
+}
+
+header,
+.logo,
+.image {
+    align-items: center;
+}
+
+header {
+    grid-area: header;
+}
+
+.logo {
+    block-size: var(--size-48);
+    inline-size: 100%;
+    max-inline-size: 9.375rem;
+}
+
+.image {
+    grid-area: image;
+    margin-inline: calc(var(--vit-spacing-container-padding-md) * -1);
+    padding-block: var(--vit-spacing-container-padding);
+}
+
+.content {
+    gap: var(--size-8);
+    grid-area: content;
+
+    ::slotted(*) {
+        margin: unset;
+    }
+}
+
+footer {
+    gap: var(--size-16);
+    grid-area: footer;
+}
+
+::slotted([slot="logo"]) {
+    block-size: 100% !important;
+    inline-size: 100%;
+    object-fit: contain;
+}
+
+::slotted([slot="kicker"]) {
+    color: var(--vit-color-text-subtle);
+    font: var(--vit-type-label-xs);
+}
+
+::slotted([slot="heading"]) {
+    font: var(--vit-type-heading-sm);
+}
+
+::slotted([slot="support"]) {
+    font: var(--vit-type-body-xs);
+}
+
+:host(:state(no-logo)) {
+    .logo {
+        display: none;
+    }
+}
+
+:host(:state(no-header)) {
+    .card {
+        grid-template-areas:
+            "image"
+            "content"
+            "footer";
+    }
+
+    header {
+        display: none;
+    }
+
+    .image {
+        margin-block-start: calc(var(--vit-spacing-container-padding-md) * -1);
+        padding-block-start: var(--vit-spacing-container-padding-md);
+    }
+}
+
+:host(:state(no-image)) {
+    .card {
+        grid-template-areas:
+            "header"
+            "content"
+            "footer";
+    }
+
+    .image {
+        display: none;
+    }
+}
+
+:host(:state(no-footer)) {
+    .card {
+        grid-template-areas:
+            "header"
+            "image"
+            "content";
+    }
+
+    footer {
+        display: none;
+    }
+}
+
+:host(:state(no-header):state(no-image)) {
+    .card {
+        grid-template-areas:
+            "content"
+            "footer";
+    }
+}
+
+:host(:state(no-header):state(no-footer)) {
+    .card {
+        grid-template-areas:
+            "image"
+            "content";
+    }
+}
+
+:host(:state(no-image):state(no-footer)) {
+    .card {
+        grid-template-areas:
+            "header"
+            "content";
+    }
+}
+
+:host(:state(no-header):state(no-image):state(no-footer)) {
+    .card {
+        grid-template-areas:
+            "content";
+    }
+}
+
+/* Clickable Cards */
+
+:host([clickable-card]) {
+    cursor: pointer;
+    transition: box-shadow 0.5s;
+
+    .stretched-link {
+        inset: 0;
+        position: absolute;
+        z-index: 1;
+    }
+
+    ::slotted([slot="heading"]) {
+        color: var(--vit-color-action);
+        text-decoration-color: oklch(from currentColor l c h / 30%);
+        text-decoration-line: underline;
+        text-decoration-skip-ink: auto;
+        text-decoration-thickness: 1px;
+        text-underline-position: under;
+        transition: text-decoration-color 0.5s;
+    }
+
+    ::slotted([slot="action"]) {
+        display: none !important;
+    }
+}
+
+:host([clickable-card]:hover),
+:host([clickable-card]:focus),
+:host([clickable-card]:active) {
+    box-shadow: var(--vit-shadow-raised);
+
+    ::slotted([slot="heading"]) {
+        color: var(--vit-color-action-hover);
+        text-decoration-color: currentColor;
+    }
+}
+
+/* Alignment */
+
+:host([alignment="center"]:not([variant])) {
+    header,
+    .content,
+    footer {
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Article Cards */
+
+:host([variant="article"]),
+:host([variant="article-horizontal"]),
+:host([variant="article-featured"]) {
+    header {
+        display: none;
+    }
+
+    ::slotted([slot="image"]) {
+        inline-size: 100%;
+    }
+
+    .image {
+        padding: unset;
+    }
+}
+
+:host([variant="article"]),
+:host([variant="article-horizontal"]) {
+    ::slotted([slot="image"]) {
+        object-fit: cover;
+    }
+}
+
+:host([variant="article"]) {
+    ::slotted([slot="image"]) {
+        block-size: 16.875rem !important;
+    }
+}
+
+/* Article Featured Cards */
+
+:host([variant="article-featured"]) {
+    .card {
+        grid-template-rows: auto 1fr auto;
+    }
+}
+
+/* Article Horizontal Cards */
+
+:host([variant="article-horizontal"]) {
+    .card {
+        grid-template-areas:
+            "content"
+            "footer";
+
+        /* 768px */
+        @container vit-card (width >= 568px) {
+            grid-template-areas:
+                "content image"
+                "footer image";
+            grid-template-columns: 1fr 10.938rem;
+        }
+    }
+
+    .image {
+        display: none;
+        margin: unset;
+
+        /* 768px */
+        @container vit-card (width >= 568px) {
+            display: block;
+            margin: calc(var(--vit-spacing-container-padding-md) * -1) calc(var(--vit-spacing-container-padding-md) * -1) calc(var(--vit-spacing-container-padding-md) * -1) 0;
+        }
+    }
+
+    ::slotted([slot="image"]) {
+        block-size: 100% !important;
+    }
+}
+
+:host([variant="article-horizontal"]:state(no-image)) {
+    .card {
+        grid-template-areas:
+            "content"
+            "footer";
+        grid-template-columns: unset;
+    }
+
+    .image {
+        display: none;
+    }
+}
+
+:host([variant="article-horizontal"]:state(no-footer)) {
+    .card {
+        grid-template-areas:
+            "content image"
+    }
+
+    footer {
+        display: none;
+    }
+}
+
+/* Article Aside Cards */
+
+:host([variant="article-aside"]) {
+    border-radius: unset;
+    box-shadow: unset !important;
+
+    .card {
+        background-color: unset;
+        grid-template-areas:
+            "content"
+            "footer";
+        padding: unset;
+    }
+
+    header,
+    .image {
+        display: none;
+    }
+}
+
+:host([variant="article-aside"]:state(no-footer)) {
+    .card {
+        grid-template-areas:
+            "content";
+    }
+
+    footer {
+        display: none;
+    }
+}
+
+/* Logo Button */
+
+:host([variant="logo-button"]) {
+    .card {
+        grid-template-areas:
+            "header" !important;
+    }
+
+    header {
+        align-items: center;
+    }
+
+    .logo {
+        max-inline-size: 12.5rem;
+    }
+
+    .image,
+    .content,
+    footer {
+        display: none;
+    }
+}
+
+/* Horizontal Cards */
+
+:host([variant="horizontal"]) {
+    .card {
+        gap: var(--vit-spacing-container-padding);
+        grid-template-areas:
+            "image content"
+            "image footer" !important;
+        grid-template-columns: var(--size-48) 1fr;
+        padding: var(--vit-spacing-container-padding);
+
+        /* 768px */
+        @container vit-card (width >= 568px) {
+            gap: var(--vit-spacing-container-padding) var(--vit-spacing-container-padding-md);
+            grid-template-columns: var(--size-80) 1fr;
+            padding: var(--vit-spacing-container-padding-md);
+        }
+    }
+
+    header {
+        display: none;
+    }
+
+    .image {
+        inline-size: 100%;
+        justify-content: center;
+        margin: unset !important;
+        padding: unset !important;
+    }
+
+    footer {
+        flex-direction: unset;
+        flex-wrap: wrap;
+    }
+
+    ::slotted([slot="heading"]) {
+        font: var(--vit-type-heading-xs);
+    }
+}
+
+:host([variant="horizontal"]:state(no-footer)) {
+    .card {
+        grid-template-areas:
+            "image content" !important;
+    }
+}
+
+:host([variant="horizontal"][background-color="subtle"]) {
+    --_card-bg-color: var(--vit-color-surface-subtle-2);
+    --_card-font-color: var(--vit-color-on-surface-subtle-2);
+}
+
+:host([variant="horizontal"][background-color="strong"]) {
+    --_card-bg-color: var(--vit-color-surface-strong-1);
+    --_card-font-color: var(--vit-color-on-surface-strong-1);
+
+    ::slotted([slot="kicker"]) {
+        color: var(--vit-color-text-subtle-on-surface-strong);
+    }
+
+    ::slotted([slot="action"]) {
+        color: var(--_card-font-color) !important;
+    }
+}
+
+:host([variant="horizontal"][background-color="strong"][clickable-card]) {
+    ::slotted([slot="heading"]) {
+        color: var(--_card-font-color);
+    }
+}
+
+:host([background-color="transparent"]:not([variant="article"], [variant="article-horizontal"], [variant="article-aside"], [variant="article-featured"], [variant="logo-button"])) {
+    --_card-bg-color: unset;
+    border-radius: unset;
+    box-shadow: unset !important;
+
+    .card {
+        padding: unset;
+    }
+}
+
+:host([variant="horizontal"][flat]) {
+    box-shadow: unset;
+}
+
+:host([variant="horizontal"][flat][clickable-card]:hover),
+:host([variant="horizontal"][flat][clickable-card]:focus),
+:host([variant="horizontal"][flat][clickable-card]:active) {
+    box-shadow: var(--vit-shadow-raised);
+}
